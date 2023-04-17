@@ -2,24 +2,26 @@ sudo apt-get install linux-image-extra-virtual
 
 To change the screen resolution in Ubuntu running on Hyper-V, you can follow these steps:
 
-Launch Ubuntu in Hyper-V.
+Open the GRUB configuration file using a text editor:
 
-Open a terminal window by pressing the "Ctrl+Alt+T" keyboard shortcut.
+sudo nano /etc/default/grub
 
-Type the following command to open the Xorg configuration file:
+Find the following line in the file:
 
-sudo nano /etc/X11/xorg.conf
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 
-Add the following lines to the file:
+Modify the line to add "video=hyperv_fb:1920x1080" (or the screen resolution of your choice) to the end, like this:
 
-Section "Screen"
-    Identifier "Default Screen"
-    SubSection "Display"
-        Depth 24
-        Modes "1920x1080"
-    EndSubSection
-EndSection
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash video=hyperv_fb:1920x1080"
 
-Note: The "1920x1080" resolution is just an example. You can replace it with any resolution that is supported by your monitor.
+Note: Make sure to replace "1920x1080" with the screen resolution you want to use.
 
-Save and exit the file by pressing "Ctrl+X", then "Y", and then "Enter".
+Save the file by pressing "Ctrl+X", then "Y", and then "Enter".
+
+Update the GRUB configuration by running the following command:
+
+sudo update-grub
+
+Reboot your Ubuntu virtual machine again by running the following command:
+sudo reboot
+
