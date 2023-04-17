@@ -45,4 +45,11 @@ If you still have issues with the sound, you can try adjusting the ALSA mixer se
 
 alsamixer
 
+sudo nano /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash video=hyperv_fb:1920x1080"
+GRUB_GFXMODE=1024x768,800x600,640x480
+sudo update-grub
+sudo reboot
+
+
 
