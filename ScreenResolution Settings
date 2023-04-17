@@ -1,27 +1,20 @@
-sudo apt-get install linux-image-extra-virtual
+Since you are running Ubuntu 22.04.2 as a virtual machine using Hyper-V, you may need to install the virtual drivers to get the best performance and resolution. You can follow the steps below to install the Hyper-V Integration Services on Ubuntu:
 
-To change the screen resolution in Ubuntu running on Hyper-V, you can follow these steps:
+Start the Ubuntu virtual machine.
 
-Open the GRUB configuration file using a text editor:
+Open the Terminal application.
 
-sudo nano /etc/default/grub
+Install the Hyper-V integration services by typing the following command and pressing Enter:
 
-Find the following line in the file:
+sudo apt-get install hv-kvp-daemon-init linux-tools-virtual linux-cloud-tools-virtual
 
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+Reboot the virtual machine by typing the following command and pressing Enter
 
-Modify the line to add "video=hyperv_fb:1920x1080" (or the screen resolution of your choice) to the end, like this:
-
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash video=hyperv_fb:1920x1080"
-
-Note: Make sure to replace "1920x1080" with the screen resolution you want to use.
-
-Save the file by pressing "Ctrl+X", then "Y", and then "Enter".
-
-Update the GRUB configuration by running the following command:
-
-sudo update-grub
-
-Reboot your Ubuntu virtual machine again by running the following command:
 sudo reboot
+
+After the virtual machine reboots, the Hyper-V integration services should be installed and the virtual machine should have better performance and screen resolution.
+
+If the performance is still not satisfactory, you may need to install additional drivers for your laptop's hardware. You can check the ASUS website for drivers and support for Ubuntu, or try installing the drivers manually.
+
+I hope this helps! Let me know if you have any further questions or issues.
 
