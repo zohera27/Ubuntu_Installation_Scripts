@@ -1,8 +1,15 @@
-Since you are running Ubuntu 22.04.2 as a virtual machine using Hyper-V, you may need to install the virtual drivers to get the best performance and resolution. You can follow the steps below to install the Hyper-V Integration Services on Ubuntu:
+Since you are running Ubuntu 22.04.2 as a virtual machine using Hyper-V, you may need to install the virtual drivers to get the best performance and resolution. 
+You can follow the steps below to install the Hyper-V Integration Services on Ubuntu:
 
-Start the Ubuntu virtual machine.
+Open the Terminal application on your Ubuntu virtual machine.
+Add the Microsoft package repository key by running the following command:
 
-Open the Terminal application.
+wget https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+
+Add the Microsoft package repository to your sources list by running the following command:
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-focal-prod focal main"
+Update your package list:
+sudo apt-get update
 
 Install the Hyper-V integration services by typing the following command and pressing Enter:
 
