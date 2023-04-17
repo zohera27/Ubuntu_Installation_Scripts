@@ -1,0 +1,25 @@
+To enable SSH on Ubuntu, you can follow these steps:
+
+Open a terminal window by pressing "Ctrl+Alt+T" on your keyboard.
+
+Install the OpenSSH server package by running the following command:
+sudo apt-get install openssh-server
+
+Once the installation is complete, the SSH service will start automatically. You can check the status of the SSH service by running the following command:
+sudo systemctl status ssh
+
+If the SSH service is active and running, you should see a message indicating that it is active.
+
+If the SSH service is not running, you can start it by running the following command:
+sudo systemctl start ssh
+
+If you want the SSH service to start automatically whenever you start your computer, you can enable the SSH service to start at boot time by running the following command:
+sudo systemctl enable ssh
+
+You can now connect to your Ubuntu machine using SSH from another computer on the same network. You will need to know the IP address of your Ubuntu machine to connect to it.
+To find your IP address, run the following command:
+ip addr show
+
+Look for the "inet" address associated with your network interface. This is your IP address.
+To connect to your Ubuntu machine from another computer, use the following command:
+ssh username@ip-address
