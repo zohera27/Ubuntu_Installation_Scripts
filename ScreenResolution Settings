@@ -26,5 +26,23 @@ If the performance is still not satisfactory, you may need to install additional
 
 I hope this helps! Let me know if you have any further questions or issues.
 
+sudo apt-get update
+
+sudo apt-get install xserver-xorg-video-all
+
+sudo apt-get install linux-generic
+
+sudo apt-get install linux-azure
+
+Reboot the virtual machine.
+cat /proc/asound/cards
+This should display a list of available sound cards. Look for the card that is labeled "ALSA" and note its number (usually 0).
+
+Open the sound settings by clicking on the speaker icon in the top right corner of the screen, then click on "Sound Settings". 
+Under the "Output" tab, select the ALSA sound card from the list (it should be labeled with the number you noted in the previous step).
+
+If you still have issues with the sound, you can try adjusting the ALSA mixer settings by running the following command in the terminal:
+
+alsamixer
 
 
