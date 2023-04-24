@@ -33,6 +33,12 @@ sudo apt-get install xserver-xorg-video-all
 sudo apt-get install linux-generic
 
 sudo apt-get install linux-azure
+for LTS :::: sudo apt-get install linux-tools-5.19.0-40-generic linux-cloud-tools-5.19.0-40-generic
+sudo systemctl start hv_vss_daemon.service hv_fcopy_daemon.service hv_kvp_daemon.service
+linux-tools-5.19.0-40-generic
+linux-cloud-tools-5.19.0-40-generic
+linux-tools-generic
+linux-cloud-tools-generic
 
 Reboot the virtual machine.
 cat /proc/asound/cards
