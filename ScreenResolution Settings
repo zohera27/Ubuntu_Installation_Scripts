@@ -40,6 +40,11 @@ linux-cloud-tools-5.19.0-40-generic
 linux-tools-generic
 linux-cloud-tools-generic
 
+sudo systemctl status hv*
+hv-vss-daemon.service
+hv-fcopy-daemon.service
+hv-kvp-daemon.service
+
 Reboot the virtual machine.
 cat /proc/asound/cards
 This should display a list of available sound cards. Look for the card that is labeled "ALSA" and note its number (usually 0).
