@@ -45,6 +45,8 @@ hv-vss-daemon.service
 hv-fcopy-daemon.service
 hv-kvp-daemon.service
 
+sudo update-initramfs -u
+
 Reboot the virtual machine.
 cat /proc/asound/cards
 This should display a list of available sound cards. Look for the card that is labeled "ALSA" and note its number (usually 0).
