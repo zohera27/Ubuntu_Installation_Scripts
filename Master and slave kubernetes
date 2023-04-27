@@ -96,3 +96,18 @@ sudo rm /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get clean
 sudo reboot now
 
+To troubleshoot workernode
+
+sudo systemctl status kubelet.service
+sudo systemctl cat kubelet
+sudo nano /etc/default/kubelet
+KUBELET_EXTRA_ARGS=--node-ip=<worker_node_ip_address>
+Edit the kubelet service configuration file by creating a new drop-in file under /etc/systemd/system/kubelet.service.d/ with the following contents:
+[Service]
+Environment="KUBELET_EXTRA_ARGS=--node-ip=<worker_node_ip_address>"
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+kubectl drain <node_name> --ignore-daemonsets
+kubectl uncordon <node_name>
+
+
