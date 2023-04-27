@@ -15,9 +15,30 @@ sudo systemctl start docker && sudo systemctl enable docker
 sudo kubeadm init
 
 Note if you see any error related to containerd -> please go to /etc/containerd/config.toml
-change disabled_plugin to enabled_plugin
-[plugins."io.containerd.grpc.v1.cri".containerd]
-  endpoint = "unix:///var/run/containerd/containerd.sock"
+
+enabled_plugins = ["cri"]
+[plugins."io.containerd.grpc.v1.cri"]
+  sandbox_image = "registry.k8s.io/pause:3.9"
+
+git clone https://github.com/Mirantis/cri-dockerd.git
+# Run these commands as root
+###Install GO###
+wget https://storage.googleapis.com/golang/getgo/installer_linux
+chmod +x ./installer_linux
+./installer_linux
+source ~/.bash_profile
+
+cd cri-dockerd
+mkdir bin
+go build -o bin/cri-dockerd
+mkdir -p /usr/local/bin
+install -o root -g root -m 0755 bin/cri-dockerd /usr/local/bin/cri-dockerd
+cp -a packaging/systemd/* /etc/systemd/system
+sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service
+systemctl daemon-reload
+systemctl enable cri-docker.service
+systemctl enable --now cri-docker.socket
+
 
 sudo kubeadm init --apiserver-advertise-address 192.168.2.105 --pod-network-cidr=10.244.0.0/16
 once successfully initialized
