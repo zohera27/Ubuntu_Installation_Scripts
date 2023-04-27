@@ -19,7 +19,7 @@ change disabled_plugin to enabled_plugin
 [plugins."io.containerd.grpc.v1.cri".containerd]
   endpoint = "unix:///var/run/containerd/containerd.sock"
 
-sudo kubeadm init --apiserver-advertise-address 192.168.2.105 --pod-network-cidr=172.16.0.0/16
+sudo kubeadm init --apiserver-advertise-address 192.168.2.105 --pod-network-cidr=10.244.0.0/16
 once successfully initialized
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
