@@ -50,5 +50,6 @@ sudo ufw enable
  sudo apt-get update
  sudo apt-get install -y kubelet=1.20.00-00 kubeadm=1.20.00-00 kubectl=1.20.00-00 docker.io
  sudo systemctl start docker && sudo systemctl enable docker
-kubeadm join 192.168.2.105:6443 --token e7rmro.828bl4cc821rkrcf \
-        --discovery-token-ca-cert-hash sha256:c8d76a840d29ef1efa2c159e4704c39cf66919ee33812cfb554b5b91700d33cf
+
+kubeadm join 192.168.2.105:6443 --token d6g472.ntr7ayhwzgjnqkx5 \
+        --discovery-token-ca-cert-hash sha256:d0a2d6889b40496e1684dd51017c4bae290fbf1d5200208a0a33af9651cae0f4
