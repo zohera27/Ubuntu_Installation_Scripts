@@ -86,3 +86,12 @@ kubeadm join 192.168.2.105:6443 --token abcdef.0123456789abcdef \
   name: <node-name>
 
 
+To uninstall
+
+sudo systemctl stop kubelet
+sudo apt-get purge kubeadm kubelet kubectl
+sudo rm -rf /etc/kubernetes /var/lib/kubelet /var/lib/kubernetes /var/run/kubernetes ~/.kube
+sudo rm /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get clean
+sudo reboot now
+
