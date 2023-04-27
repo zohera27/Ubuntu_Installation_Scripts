@@ -77,3 +77,12 @@ sudo ufw enable
 
 kubeadm join 192.168.2.105:6443 --token abcdef.0123456789abcdef \
         --discovery-token-ca-cert-hash sha256:1dd97ef487f147383d3a733ad2eeeaa94a0b1d27ac365329293d49b89a884ca2
+        
+        
+        for jjoin
+        
+        nodeRegistration:
+  criSocket: /run/containerd/containerd.sock
+  name: <node-name>
+
+
