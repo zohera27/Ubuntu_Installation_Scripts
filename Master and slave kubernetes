@@ -43,6 +43,8 @@ systemctl enable --now cri-docker.socket
 sudo kubeadm config print init-defaults > kubeadm.yaml
 sudo kubeadm init --apiserver-advertise-address 192.168.2.105 --pod-network-cidr=10.244.0.0/16
 sudo kubeadm init --config=kubeadm.yaml --apiserver-advertise-address 192.168.2.105 --pod-network-cidr=10.244.0.0/16
+sudo lsof -i :10250
+sudo kill 31560
 
 once successfully initialized
 mkdir -p $HOME/.kube
