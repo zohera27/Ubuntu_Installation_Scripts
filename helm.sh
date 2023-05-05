@@ -138,6 +138,9 @@ spec:
 kubectl patch pvc storage-prometheus-alertmanager-0 -p '{"spec":{"volumeName":"alertmanager-pv"}}'
 kubectl patch pvc storage-prometheus-alertmanager-0 -p '{"spec":{"storageClassName":"local-storage"}}'
 
+kubectl create sa my-service-account
+kubectl create clusterrolebinding my-service-account-binding --clusterrole=view --serviceaccount=default:my-service-account
+
 Now Grafana installation using Helm
 
 1. helm repo add grafana https://grafana.github.io/helm-charts
