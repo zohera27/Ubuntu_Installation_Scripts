@@ -133,7 +133,10 @@ spec:
   volumeMode: Filesystem
   storageClassName: local-storage
   volumeName: prometheus-pv
+>>>>>>>>>>>>>>>
 
+kubectl patch pvc storage-prometheus-alertmanager-0 -p '{"spec":{"volumeName":"alertmanager-pv"}}'
+kubectl patch pvc storage-prometheus-alertmanager-0 -p '{"spec":{"storageClassName":"local-storage"}}'
 
 Now Grafana installation using Helm
 
@@ -167,6 +170,9 @@ Get the PushGateway URL by running these commands in the same shell:
   kubectl --namespace default port-forward $POD_NAME 9091
 
 
-	
+To uninstall 
+
+helm uninstall prometheus --namespace default && kubectl delete pvc -l release=prometheus --namespace default
+
 
 Method 2 – Operator: Need to Check
