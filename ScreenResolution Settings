@@ -14,7 +14,7 @@ sudo apt-get update
 
 Install the Hyper-V integration services by typing the following command and pressing Enter:
 
-sudo apt-get install hv-kvp-daemon-init linux-tools-virtual linux-cloud-tools-virtual
+sudo apt-get install linux-tools-virtual linux-cloud-tools-virtual hv-kvp-daemon-init 
 
 Reboot the virtual machine by typing the following command and pressing Enter
 
