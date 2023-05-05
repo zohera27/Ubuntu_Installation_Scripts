@@ -8,7 +8,7 @@ chmod 700 get_helm.sh
 
 ./get_helm.sh 
 
-Helm Version
+helm Version
 
 Method 2 – From Apt (Debian/Ubuntu)
 
@@ -21,7 +21,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.
 sudo apt-get update
 
 sudo apt-get install helm
-Helm Version
+helm Version
 
 
 					Prometheus & Grafana Installation using Helm Chart
@@ -51,6 +51,90 @@ Note – Check if the same name Prometheus-server is there in your kubectl get s
 10. Sample Prometheus Queries:
 
 
+
+
+
+
+Important Note – if you face any issues like Persistent Volume in Prometheus then follow below steps:
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prometheus-pv
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-storage
+  hostPath:
+    path: "/mnt/PrometheusVolume"
+
+-------------
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: alertmanager-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-storage
+  hostPath:
+    path: "/mnt/StorageVolume"
+
+Next File: is PersistentVolumeClaims
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: storage-prometheus-alertmanager-0
+  namespace: default
+  labels:
+    app.kubernetes.io/name: alertmanager
+    app.kubernetes.io/instance: prometheus
+  finalizers:
+    - kubernetes.io/pvc-protection
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+  storageClassName: local-storage
+  volumeName: alertmanager-pv
+
+----------
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-server
+  namespace: default
+  labels:
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/component: server
+    app.kubernetes.io/part-of: prometheus
+    app.kubernetes.io/version: v2.43.0
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/managed-by: Helm
+
+  finalizers:
+    - kubernetes.io/pvc-protection
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+  volumeMode: Filesystem
+  storageClassName: local-storage
+  volumeName: prometheus-pv
+
+
 Now Grafana installation using Helm
 
 1. helm repo add grafana https://grafana.github.io/helm-charts
@@ -69,6 +153,20 @@ username – admin
 
 Now in Grafana, add a Datasource -> Prometheus ->ip address of Prometheus
 
-Import the Dashboard with 32262 or 6417	
+Import the Dashboard with 32262 or 6417
+
+Important Notes you can Check optionally
+
+Get the Alertmanager URL by running these commands in the same shell:
+  export POD_NAME=$(kubectl get pods --namespace default -l "app=prometheus,component=" -o jsonpath="{.items[0].metadata.name}")
+  kubectl --namespace default port-forward $POD_NAME 9093
+
+
+Get the PushGateway URL by running these commands in the same shell:
+  export POD_NAME=$(kubectl get pods --namespace default -l "app=prometheus-pushgateway,component=pushgateway" -o jsonpath="{.items[0].metadata.name}")
+  kubectl --namespace default port-forward $POD_NAME 9091
+
+
+	
 
 Method 2 – Operator: Need to Check
