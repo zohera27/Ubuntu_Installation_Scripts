@@ -149,7 +149,7 @@ Now Grafana installation using Helm
 
 3. helm install grafana grafana/grafana
 
-4. kubectl get secret –namespace default grafana -o jsonpath=”{.data.admin-password}” | base64 –decode ; echo
+4. kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
 username – admin
 
