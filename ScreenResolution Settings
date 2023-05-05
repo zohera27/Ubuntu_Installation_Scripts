@@ -4,8 +4,9 @@ You can follow the steps below to install the Hyper-V Integration Services on Ub
 Open the Terminal application on your Ubuntu virtual machine.
 Add the Microsoft package repository key by running the following command:
 
-wget https://packages.microsoft.com/keys/microsoft.asc -O- | sudo tee /usr/share/keyrings/microsoft.asc
-
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/microsoft.gpg > /dev/null
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /usr/share/keyrings/microsoft-archive-keyring.gpg > /dev/null
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EB3E94ADBE1229CF
 Add the Microsoft package repository to your sources list by running the following command:
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-jammy-prod jammy main"
 Update your package list:
