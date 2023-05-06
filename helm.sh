@@ -45,7 +45,9 @@ Method 1 – Helm
 
 Note – Check if the same name Prometheus-server is there in your kubectl get svc
 
-8. kubectl get svc (you will see the new svc Prometheus-server-NodePort)
+8. kubectl get svc (you will see the new svc prometheus-server-nodeport)
+
+kubectl patch service prometheus-server-nodeport --type='json' --patch='[{"op": "replace", "path": "/spec/ports/0/nodePort", "value":31000}]'
 
 9. Open the URL with NodePort Port Number
 
