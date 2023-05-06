@@ -40,7 +40,8 @@ Method 1 – Helm
 
 6. So, we will convert ClusterIP to Nodeport
 
-7. kubectl expose service prometheus-server –-type=NodePort –-target-port=9090 --name=prometheus-server-NodePort
+7. kubectl expose service prometheus-server --type=NodePort --target-port=9090 --name=prometheus-server-nodeport
+
 
 Note – Check if the same name Prometheus-server is there in your kubectl get svc
 
