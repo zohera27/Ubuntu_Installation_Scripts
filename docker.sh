@@ -26,3 +26,10 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 sudo usermod -aG docker <username>
 
 sudo chmod 777 /var/run/docker.sock
+
+Important Points
+
+sudo nano /lib/systemd/system/docker.service
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+ExecStart=/usr/bin/dockerd -H unix:// -H tcp://0.0.0.0:2375
+
